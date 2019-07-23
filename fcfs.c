@@ -1,8 +1,9 @@
 #include<stdio.h>
 
 int main(){
-	int n,bt[20], waitTime[20], turnAroundTime[20], averageWaitTime=0, totalWaitTime=0, averageTurnAroundTime=0,  i, j;
-	int time_quantum, remain=0,remainTime[20], time,flag=0,arrivalTime[20];
+	int n,bt[20], waitTime[20], turnAroundTime[20],i, j;;
+	int averageWaitTime=0, totalWaitTime=0, averageTurnAroundTime=0; 
+	int time_quantum, remain,remainTime[20], time,flag=0,arrivalTime[20];
 	printf("ENter total number of processes(maximum 20):");
 	scanf("%d",&n);
 	remain=n;
@@ -22,7 +23,7 @@ int main(){
 		}
 	}
 
-	/*
+	
 	printf("\nFor FirstComeFirstServe : \n");
 	printf("\nProcess\t\tBurst Time\tWaiting Time\tTurnaround Time");
 	
@@ -38,7 +39,7 @@ int main(){
 	printf("\n\nTotal Wait Time:%d",totalWaitTime);
 	printf("\nAverage Waiting Time:%d",averageWaitTime);
 	printf("\nAverage Turnaround Time:%d",averageTurnAroundTime);
-	*/
+	
 
 	printf("\n\nFor Round Robin : \n");
 	printf("\nEnter Time Quantum:\t");
@@ -61,25 +62,23 @@ int main(){
 			remain--;
 			turnAroundTime[i] = time-arrivalTime[i];
 			waitTime[i] = time-arrivalTime[i]-bt[i];
-			printf("\nP[%d]\t\t%d\t\t%d\n", i+1,turnAroundTime[i] ,waitTime[i] );
+			printf("\nP[%d]\t\t%d\t\t\t\t%d\n", i+1,turnAroundTime[i] ,waitTime[i] );
 			totalWaitTime+= waitTime[i];
 			averageTurnAroundTime+=turnAroundTime[i];
 			flag=0;
 		}
-		if(i ==n-1)
+		if(i==(n-1))
 			i=0;
-		else if(arrivalTime[i-1]<= time)
+		else if(arrivalTime[i+1]<= time)
 			i++;
 		else
 			i =0;
 	}
-	averageWaitTime=totalWaitTime/i;
-	averageTurnAroundTime/=i;
+	
 	printf("\n\nTotal Wait Time:%d",totalWaitTime);
-	printf("\nAverage Waiting Time:%d",averageWaitTime);
-	printf("\nAverage Turnaround Time:%d",averageTurnAroundTime);
+	printf("\nAverage Waiting Time:%d",totalWaitTime/n);
+	printf("\nAverage Turnaround Time:%d",averageTurnAroundTime/n);
 	
 	
 	return 0;
 }
-
